@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaFileUpload, FaRegUserCircle } from "react-icons/fa";
 import { MdDashboard, MdDriveFolderUpload, MdFileUpload } from "react-icons/md";
 import {
@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import UplodAtt from "./UplodAtt";
+import UplodMarks from "./UplodMarks";
 import UpNotice from "./UpNotice";
 import UpQp from "./UpQp";
 
@@ -48,6 +49,8 @@ export const StaffHome = () => {
         return <UpNotice />;
       case "uplodQp":
         return <UpQp />;
+      case "uplodMarks":
+        return <UplodMarks />;
       default:
         return (
           <h2 className="text-2xl font-bold">Welcome to the Staff DashBoard</h2>
@@ -98,6 +101,11 @@ export const StaffHome = () => {
             onClick={() => setActiveContent("uplodQp")}
             className="block text-left px-4 py-2 hover:bg-gray-700 rounded ">
             {isSidebarOpen ? "UplodQp" : <FaFileUpload />}
+          </button>
+          <button
+            onClick={() => setActiveContent("uplodMarks")}
+            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
+            {isSidebarOpen ? "UplodMarks" : <FaFileUpload />}
           </button>
         </nav>
       </div>

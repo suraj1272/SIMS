@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { CiViewList } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdOutlinePreview } from "react-icons/md";
 import {
   TbLayoutSidebarLeftCollapseFilled,
   TbLayoutSidebarRightCollapseFilled,
@@ -9,10 +10,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import ViewAtd from "./ViewAtd";
+import ViewMarks from "./ViewMarks";
 import ViewNotice from "./ViewNotice";
 import ViewQp from "./ViewQp";
-import { CiViewList } from "react-icons/ci";
-import { MdOutlinePreview } from "react-icons/md";
 
 const StudentHome = () => {
   const navigate = useNavigate();
@@ -53,6 +53,8 @@ const StudentHome = () => {
         return <ViewNotice />;
       case "viewQuestionPaper":
         return <ViewQp />;
+      case "viewMarks":
+        return <ViewMarks />;
       default:
         return (
           <h2 className="text-2xl font-bold">
@@ -106,6 +108,11 @@ const StudentHome = () => {
             onClick={() => setActiveContent("viewQuestionPaper")}
             className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
             {isSidebarOpen ? "View Question Paper" : <MdOutlinePreview />}
+          </button>
+          <button
+            onClick={() => setActiveContent("viewMarks")}
+            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
+            {isSidebarOpen ? "View Marks" : <CiViewList />}
           </button>
         </nav>
       </div>

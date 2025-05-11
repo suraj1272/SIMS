@@ -10,6 +10,8 @@ const multer = require("multer");
 const QuestionPaper = require("./modules/UpQp");
 const App = express();
 const cors = require("cors");
+const MarksModule = require("./modules/Marks");
+
 const addAtdModule = require("./modules/AddAtd");
 App.use(cors());
 App.use(express.json());
@@ -352,6 +354,57 @@ App.put("/updateStaff/:id", async (req, res) => {
     res.status(200).json(updatedStaff);
   } catch (err) {
     res.status(500).json({ error: "Failed to update staff", details: err });
+  }
+});
+
+App.post("/addMarks", async (req, res) => {
+  try {
+    const { marksData } = req.body; // Array of marks data
+    const newMarks = await MarksModule.insertMany(marksData);
+    res.status(201).json(newMarks);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to add marks", details: err });
+  }
+});
+App.get("/getMarks/:usn", async (req, res) => {
+  try {
+    const { usn } = req.params;
+    const marks = await MarksModule.find({ usn });
+    res.status(200).json(marks);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch marks", details: err });
+  }
+});
+App.post("/addMarks", async (req, res) => {
+  try {
+    const { usn, subject, marks, examType } = req.body;
+    const newMarks = await MarksModule.create({
+      usn,
+      subject,
+      marks,
+      examType,
+    });
+    res.status(201).json(newMarks);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to add marks", details: err });
+  }
+});
+App.get("/getStudentsBySemAndDiv", async (req, res) => {
+  const { sem, div } = req.query;
+  try {
+    const students = await StdModel.find({ sem, div });
+    res.status(200).json(students);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch students", details: err });
+  }
+});
+
+App.get("/getSubjects", async (req, res) => {
+  try {
+    const subjects = await addSubModule.find();
+    res.status(200).json(subjects);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch subjects", details: err });
   }
 });
 

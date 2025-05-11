@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,9 +14,11 @@ import StdDetails from "./components/StdDetails";
 import StudentHome from "./components/StudentHome";
 import StudentLogin from "./components/StudentLogin";
 import UplodAtt from "./components/UplodAtt";
+import UplodMarks from "./components/UplodMarks";
 import UpNotice from "./components/UpNotice";
 import UpQp from "./components/UpQp";
 import ViewAtd from "./components/ViewAtd";
+import ViewMarks from "./components/ViewMarks";
 import ViewNotice from "./components/ViewNotice";
 import ViewQp from "./components/ViewQp";
 import ViewStaff from "./components/ViewStaff";
@@ -126,6 +127,14 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/staffHome/uplodMarks"
+            element={
+              <ProtectedRoute allowedRoles={["staff"]}>
+                <UplodMarks />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Student Protected Routes */}
           <Route
@@ -157,6 +166,14 @@ const App = () => {
             element={
               <ProtectedRoute allowedRoles={["student"]}>
                 <ViewQp />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/studentHome/viewMarks"
+            element={
+              <ProtectedRoute allowedRoles={["student"]}>
+                <ViewMarks />
               </ProtectedRoute>
             }
           />
