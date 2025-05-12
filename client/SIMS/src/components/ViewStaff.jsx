@@ -59,29 +59,35 @@ const ViewStaff = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-start justify-center bg-gradient-to-r from-amber-100 via-purple-100 to-red-100 p-6">
-      <div className="w-full overflow-x-auto bg-white p-6 rounded-xl shadow-lg border border-gray-200 max-w-6xl">
-        <h2 className="text-2xl font-bold text-center mb-4 text-gray-800">
+    <div className="min-h-screen flex items-start justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 p-6">
+      <div className="w-full overflow-x-auto bg-white p-6 rounded-3xl shadow-2xl border border-gray-200 max-w-7xl">
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
           Staff Details
         </h2>
-        <table className="min-w-full table-auto text-sm border-collapse border border-gray-300">
-          <thead className="bg-gray-100">
+        <table className="min-w-full table-auto text-sm border-collapse">
+          <thead className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
             <tr>
-              <th className="border px-4 py-2">Name</th>
-              <th className="border px-4 py-2">Designation</th>
-              <th className="border px-4 py-2">Experience</th>
-              <th className="border px-4 py-2">Qualification</th>
-              <th className="border px-4 py-2">Email</th>
-              <th className="border px-4 py-2">Phone</th>
-              <th className="border px-4 py-2">Actions</th>
+              <th className="px-4 py-3 text-left font-semibold">Name</th>
+              <th className="px-4 py-3 text-left font-semibold">Designation</th>
+              <th className="px-4 py-3 text-left font-semibold">Experience</th>
+              <th className="px-4 py-3 text-left font-semibold">
+                Qualification
+              </th>
+              <th className="px-4 py-3 text-left font-semibold">Email</th>
+              <th className="px-4 py-3 text-left font-semibold">Phone</th>
+              <th className="px-4 py-3 text-center font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {staff.map((staff) => (
-              <tr key={staff._id} className="text-center">
+            {staff.map((staff, index) => (
+              <tr
+                key={staff._id}
+                className={`${
+                  index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-gray-100 transition duration-200`}>
                 {editStaffId === staff._id ? (
                   <>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="name"
@@ -90,7 +96,7 @@ const ViewStaff = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="desgn"
@@ -99,7 +105,7 @@ const ViewStaff = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="number"
                         name="experince"
@@ -108,7 +114,7 @@ const ViewStaff = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="quali"
@@ -117,7 +123,7 @@ const ViewStaff = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="email"
                         name="email"
@@ -126,7 +132,7 @@ const ViewStaff = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="phone"
@@ -135,7 +141,7 @@ const ViewStaff = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1 space-y-1 md:space-y-0 md:space-x-2">
+                    <td className="px-4 py-2 text-center space-x-2">
                       <button
                         onClick={() => handleSaveClick(staff._id)}
                         className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
@@ -150,13 +156,13 @@ const ViewStaff = () => {
                   </>
                 ) : (
                   <>
-                    <td className="border px-4 py-2">{staff.name}</td>
-                    <td className="border px-4 py-2">{staff.desgn}</td>
-                    <td className="border px-4 py-2">{staff.experince}</td>
-                    <td className="border px-4 py-2">{staff.quali}</td>
-                    <td className="border px-4 py-2">{staff.email}</td>
-                    <td className="border px-4 py-2">{staff.phone}</td>
-                    <td className="border px-2 py-1 space-y-1 md:space-y-0 md:space-x-2">
+                    <td className="px-4 py-2">{staff.name}</td>
+                    <td className="px-4 py-2">{staff.desgn}</td>
+                    <td className="px-4 py-2">{staff.experince}</td>
+                    <td className="px-4 py-2">{staff.quali}</td>
+                    <td className="px-4 py-2">{staff.email}</td>
+                    <td className="px-4 py-2">{staff.phone}</td>
+                    <td className="px-4 py-2 text-center space-x-2">
                       <button
                         onClick={() => handleEditClick(staff)}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">

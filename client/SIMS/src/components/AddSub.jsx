@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const addSub = () => {
+const AddSub = () => {
   const [subTitle, setSubTitle] = useState("");
   const [subCode, setSubCode] = useState("");
 
@@ -13,59 +13,72 @@ const addSub = () => {
         subCode,
       })
       .then((result) => {
-        console.log(result);
-        alert("Subject Added Sucessfully ");
+        alert("Subject Added Successfully");
         setSubTitle("");
         setSubCode("");
       })
       .catch((err) => {
-        console.error("there was an error ", err);
-        alert("fill the details ");
+        console.error("There was an error:", err);
+        alert("Please fill in all the details.");
       });
   };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-amber-100 via-purple-100 to-red-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-grey-200">
-        <h2 className="text-3xl font-bold text-center text-grey-800 mb-6">
-          Add Subjects
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-100 px-4">
+      <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-2xl border border-gray-200">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Add Subject
         </h2>
-        <form className="form space-y-5" onSubmit={handleSubmit}>
-          <label htmlFor="subtitle" className="block font-medium text-grey-700">
-            <strong>Subject Title:</strong>
-          </label>
-          <input
-            type="text"
-            placeholder="Subject Title"
-            value={subTitle}
-            name="subTitle"
-            className="w-full px-4 py-2 border border-grey-300 rounded-xl focus:ring-2 focus:ring-indigo-400 focus-outline-none"
-            onChange={(e) => setSubTitle(e.target.value)}
-          />
-          <div className="subCode">
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          {/* Subject Title */}
+          <div>
             <label
-              htmlFor="subCode"
-              className="block font-medium text-grey-700">
-              <strong>Subject Code:</strong>
+              htmlFor="subTitle"
+              className="block text-lg font-medium text-gray-700 mb-2">
+              Subject Title
             </label>
             <input
               type="text"
-              placeholder="Subject Code"
+              placeholder="Enter Subject Title"
+              value={subTitle}
+              name="subTitle"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-purple-400 focus:outline-none"
+              onChange={(e) => setSubTitle(e.target.value)}
+            />
+          </div>
+
+          {/* Subject Code */}
+          <div>
+            <label
+              htmlFor="subCode"
+              className="block text-lg font-medium text-gray-700 mb-2">
+              Subject Code
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Subject Code"
               value={subCode}
               name="subCode"
-              className="w-full px-4 py-2 border border-grey-300 rounded-xl focus:ring-2 focus:ring-indigo-400 focus-outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-purple-400 focus:outline-none"
               onChange={(e) => setSubCode(e.target.value)}
             />
           </div>
-          <div className="flex-grow gap-4 justify-between mt-6">
-            <button className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 rounded-xl transition-duration-200 cursor-pointer">
+
+          {/* Submit Button */}
+          <div className="mt-6">
+            <button
+              type="submit"
+              className="w-full bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 rounded-lg shadow-lg transition duration-300">
               Submit
             </button>
           </div>
         </form>
-        <div className="flex-grow gap-4 justify-between my-6">
+
+        {/* Back Button */}
+        <div className="mt-6">
           <a href="/adminHome">
-            <button className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 rounded-xl transition-duration-200 cursor-pointer">
-              BACK
+            <button className="w-full bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 rounded-lg shadow-lg transition duration-300">
+              Back
             </button>
           </a>
         </div>
@@ -73,4 +86,5 @@ const addSub = () => {
     </div>
   );
 };
-export default addSub;
+
+export default AddSub;

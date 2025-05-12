@@ -18,7 +18,9 @@ export const StaffHome = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
-  const notify = () => toast.success("you have been logged out");
+
+  const notify = () => toast.success("You have been logged out");
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     notify();
@@ -30,6 +32,7 @@ export const StaffHome = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
   const toggleProfile = () => {
     setIsProfileOpen(!isProfileOpen);
   };
@@ -38,10 +41,7 @@ export const StaffHome = () => {
     switch (activeContent) {
       case "dashboard":
         return (
-          <h2 className="text-2xl font-bold">
-            {" "}
-            Welcome to the Staff Dashboard{" "}
-          </h2>
+          <h2 className="text-2xl font-bold">Welcome to the Staff Dashboard</h2>
         );
       case "uplodAttandance":
         return <UplodAtt />;
@@ -53,13 +53,14 @@ export const StaffHome = () => {
         return <UplodMarks />;
       default:
         return (
-          <h2 className="text-2xl font-bold">Welcome to the Staff DashBoard</h2>
+          <h2 className="text-2xl font-bold">Welcome to the Staff Dashboard</h2>
         );
     }
   };
 
   return (
     <div className="flex h-screen">
+      {/* Sidebar */}
       <div
         className={`bg-gray-800 text-white ${
           isSidebarOpen ? "w-64" : "w-16"
@@ -68,12 +69,12 @@ export const StaffHome = () => {
           <h1
             className={`text-2xl font-bold ${
               isSidebarOpen ? "block" : "hidden"
-            } `}>
+            }`}>
             Staff Panel
           </h1>
           <button
             onClick={toggleSidebar}
-            className="text-white bg-grey-700 px-2 py-1 hover:bg-grey-600">
+            className="text-white bg-gray-700 px-2 py-1 hover:bg-gray-600">
             {isSidebarOpen ? (
               <TbLayoutSidebarLeftCollapseFilled />
             ) : (
@@ -82,33 +83,79 @@ export const StaffHome = () => {
           </button>
         </div>
         <nav className="flex flex-col space-y-2">
+          {/* Dashboard */}
           <button
             onClick={() => setActiveContent("dashboard")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "DashBoard" : <MdDashboard />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <MdDashboard className="text-lg" />
+                <span className="ml-2">Dashboard</span>
+              </>
+            ) : (
+              <MdDashboard className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* Upload Attendance */}
           <button
             onClick={() => setActiveContent("uplodAttandance")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "uplodAttandance" : <MdFileUpload />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <MdFileUpload className="text-lg" />
+                <span className="ml-2">Upload Attendance</span>
+              </>
+            ) : (
+              <MdFileUpload className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* Upload Notice */}
           <button
             onClick={() => setActiveContent("uplodNotice")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "uplodNotice" : <MdDriveFolderUpload />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <MdDriveFolderUpload className="text-lg" />
+                <span className="ml-2">Upload Notice</span>
+              </>
+            ) : (
+              <MdDriveFolderUpload className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* Upload Question Paper */}
           <button
             onClick={() => setActiveContent("uplodQp")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded ">
-            {isSidebarOpen ? "UplodQp" : <FaFileUpload />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <FaFileUpload className="text-lg" />
+                <span className="ml-2">Upload Question Paper</span>
+              </>
+            ) : (
+              <FaFileUpload className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* Upload Marks */}
           <button
             onClick={() => setActiveContent("uplodMarks")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "UplodMarks" : <FaFileUpload />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <FaFileUpload className="text-lg" />
+                <span className="ml-2">Upload Marks</span>
+              </>
+            ) : (
+              <FaFileUpload className="text-lg mx-auto" />
+            )}
           </button>
         </nav>
       </div>
+
+      {/* Main Content */}
       <div className="flex-1 flex flex-col relative">
         <header className="bg-gray-900 text-white p-4 flex justify-between items-center">
           <h1 className="text-xl font-bold">Staff Home</h1>
@@ -116,7 +163,7 @@ export const StaffHome = () => {
             <FaRegUserCircle className="text-2xl cursor-pointer" />
           </button>
           {isProfileOpen && (
-            <div className="absolute top-16 right-4 bg-white hadow-lg rounded-lg p-4 w-48">
+            <div className="absolute top-16 right-4 bg-white shadow-lg rounded-lg p-4 w-48">
               <p className="text-gray-800 font-bold mb-2">{email}</p>
               <button
                 onClick={handleLogout}
@@ -130,6 +177,8 @@ export const StaffHome = () => {
           {renderContent()}
         </main>
       </div>
+
+      {/* Toast Notifications */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -144,4 +193,5 @@ export const StaffHome = () => {
     </div>
   );
 };
+
 export default StaffHome;

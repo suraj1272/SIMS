@@ -55,32 +55,38 @@ const ViewStudent = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-start justify-center bg-gradient-to-r from-amber-100 via-purple-100 to-red-100 p-6">
-      <div className="w-full overflow-x-auto bg-white  p-6 rounded-xl shadow-lg border border-gray-200 max-w-7xl">
-        <h2 className="text-2xl font-bold text-center mb-4 text-gray-800">
+    <div className="min-h-screen flex items-start justify-center bg-gradient-to-br from-teal-100 via-cyan-100 to-blue-100 p-6">
+      <div className="w-full overflow-x-auto bg-white p-6 rounded-3xl shadow-2xl border border-gray-200 max-w-7xl">
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
           Student Details
         </h2>
-        <table className="min-w-full table-auto text-sm border-collapse border border-gray-300">
-          <thead className="bg-gray-100">
+        <table className="min-w-full table-auto text-sm border-collapse">
+          <thead className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white">
             <tr>
-              <th className="border px-4 py-2">First Name</th>
-              <th className="border px-4 py-2">Middle Name</th>
-              <th className="border px-4 py-2">Last Name</th>
-              <th className="border px-4 py-2">Date of Birth</th>
-              <th className="border px-4 py-2">USN</th>
-              <th className="border px-4 py-2">Branch</th>
-              <th className="border px-4 py-2">Semester</th>
-              <th className="border px-4 py-2">Division</th>
-              <th className="border px-4 py-2">Email</th>
-              <th className="border px-4 py-2">Actions</th>
+              <th className="px-4 py-3 text-left font-semibold">First Name</th>
+              <th className="px-4 py-3 text-left font-semibold">Middle Name</th>
+              <th className="px-4 py-3 text-left font-semibold">Last Name</th>
+              <th className="px-4 py-3 text-left font-semibold">
+                Date of Birth
+              </th>
+              <th className="px-4 py-3 text-left font-semibold">USN</th>
+              <th className="px-4 py-3 text-left font-semibold">Branch</th>
+              <th className="px-4 py-3 text-left font-semibold">Semester</th>
+              <th className="px-4 py-3 text-left font-semibold">Division</th>
+              <th className="px-4 py-3 text-left font-semibold">Email</th>
+              <th className="px-4 py-3 text-center font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {students.map((student) => (
-              <tr key={student._id} className="text-center">
+            {students.map((student, index) => (
+              <tr
+                key={student._id}
+                className={`${
+                  index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-gray-100 transition duration-200`}>
                 {editStudentId === student._id ? (
                   <>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="fname"
@@ -89,7 +95,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="mname"
@@ -98,7 +104,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="lname"
@@ -107,7 +113,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="date"
                         name="dob"
@@ -116,7 +122,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="usn"
@@ -125,7 +131,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="branch"
@@ -134,7 +140,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="number"
                         name="sem"
@@ -143,7 +149,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="div"
@@ -152,7 +158,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="email"
                         name="email"
@@ -161,7 +167,7 @@ const ViewStudent = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1 space-y-1 md:space-y-0 md:space-x-2">
+                    <td className="px-4 py-2 text-center space-x-2">
                       <button
                         onClick={() => handleSaveClick(student._id)}
                         className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
@@ -176,16 +182,16 @@ const ViewStudent = () => {
                   </>
                 ) : (
                   <>
-                    <td className="border px-4 py-2">{student.fname}</td>
-                    <td className="border px-4 py-2">{student.mname}</td>
-                    <td className="border px-4 py-2">{student.lname}</td>
-                    <td className="border px-4 py-2">{student.dob}</td>
-                    <td className="border px-4 py-2">{student.usn}</td>
-                    <td className="border px-4 py-2">{student.branch}</td>
-                    <td className="border px-4 py-2">{student.sem}</td>
-                    <td className="border px-4 py-2">{student.div}</td>
-                    <td className="border px-4 py-2">{student.email}</td>
-                    <td className="border px-2 py-1 space-y-1 md:space-y-0 md:space-x-2">
+                    <td className="px-4 py-2">{student.fname}</td>
+                    <td className="px-4 py-2">{student.mname}</td>
+                    <td className="px-4 py-2">{student.lname}</td>
+                    <td className="px-4 py-2">{student.dob}</td>
+                    <td className="px-4 py-2">{student.usn}</td>
+                    <td className="px-4 py-2">{student.branch}</td>
+                    <td className="px-4 py-2">{student.sem}</td>
+                    <td className="px-4 py-2">{student.div}</td>
+                    <td className="px-4 py-2">{student.email}</td>
+                    <td className="px-4 py-2 text-center space-x-2">
                       <button
                         onClick={() => handleEditClick(student)}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
@@ -205,7 +211,7 @@ const ViewStudent = () => {
         </table>
         <div className="text-center mt-6">
           <a href="/adminHome">
-            <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded shadow-md">
+            <button className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded shadow-md">
               Home
             </button>
           </a>

@@ -61,25 +61,31 @@ const ViewSub = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-start justify-center bg-gradient-to-r from-amber-100 via-purple-100 to-red-100 p-6">
-      <div className="w-full overflow-x-auto bg-white  p-6 rounded-xl shadow-lg border border-gray-200 max-w-7xl">
+    <div className="min-h-screen flex items-start justify-center bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-100 p-6">
+      <div className="w-full overflow-x-auto bg-white p-6 rounded-3xl shadow-2xl border border-gray-200 max-w-5xl">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Subject Details
         </h2>
-        <table className="min-w-full table-auto text-sm border border-gray-300">
-          <thead className="bg-gray-100">
+        <table className="min-w-full table-auto text-sm border-collapse">
+          <thead className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
             <tr>
-              <th className="border px-4 py-2">Subject ID</th>
-              <th className="border px-4 py-2">Subject Name</th>
-              <th className="border px-4 py-2">Actions</th>
+              <th className="px-4 py-3 text-left font-semibold">Subject ID</th>
+              <th className="px-4 py-3 text-left font-semibold">
+                Subject Name
+              </th>
+              <th className="px-4 py-3 text-center font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {subjects.map((subject) => (
-              <tr key={subject._id} className="text-center">
+            {subjects.map((subject, index) => (
+              <tr
+                key={subject._id}
+                className={`${
+                  index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-gray-100 transition duration-200`}>
                 {editSubjectId === subject._id ? (
                   <>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="subCode"
@@ -88,7 +94,7 @@ const ViewSub = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="px-4 py-2">
                       <input
                         type="text"
                         name="subTitle"
@@ -97,7 +103,7 @@ const ViewSub = () => {
                         className="w-full px-2 py-1 border rounded"
                       />
                     </td>
-                    <td className="border px-2 py-1 space-y-2 md:space-y-0 md:space-x-2">
+                    <td className="px-4 py-2 text-center space-x-2">
                       <button
                         onClick={() => handleSaveClick(subject._id)}
                         className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
@@ -112,9 +118,9 @@ const ViewSub = () => {
                   </>
                 ) : (
                   <>
-                    <td className="border px-4 py-2">{subject.subCode}</td>
-                    <td className="border px-4 py-2">{subject.subTitle}</td>
-                    <td className="border px-4 py-2 space-y-2 md:space-y-0 md:space-x-2">
+                    <td className="px-4 py-2">{subject.subCode}</td>
+                    <td className="px-4 py-2">{subject.subTitle}</td>
+                    <td className="px-4 py-2 text-center space-x-2">
                       <button
                         onClick={() => handleEditClick(subject)}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
 import { ImUsers } from "react-icons/im";
@@ -70,6 +70,7 @@ const AdminHome = () => {
 
   return (
     <div className="flex h-screen">
+      {/* Sidebar */}
       <div
         className={`bg-gray-800 text-white ${
           isSidebarOpen ? "w-64" : "w-16"
@@ -92,40 +93,102 @@ const AdminHome = () => {
           </button>
         </div>
         <nav className="flex flex-col space-y-2">
+          {/* Dashboard */}
           <button
             onClick={() => setActiveContent("dashboard")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "Dashboard" : <MdDashboard />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <MdDashboard className="text-lg" />
+                <span className="ml-2">Dashboard</span>
+              </>
+            ) : (
+              <MdDashboard className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* Register Student */}
           <button
             onClick={() => setActiveContent("registerStudent")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "Register Student" : <PiStudentFill />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <PiStudentFill className="text-lg" />
+                <span className="ml-2">Register Student</span>
+              </>
+            ) : (
+              <PiStudentFill className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* Register Staff */}
           <button
             onClick={() => setActiveContent("registerStaff")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "Register Staff" : <ImUsers />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <ImUsers className="text-lg" />
+                <span className="ml-2">Register Staff</span>
+              </>
+            ) : (
+              <ImUsers className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* View Student */}
           <button
             onClick={() => setActiveContent("viewStudent")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "View Student" : <PiStudentFill />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <PiStudentFill className="text-lg" />
+                <span className="ml-2">View Student</span>
+              </>
+            ) : (
+              <PiStudentFill className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* View Staff */}
           <button
             onClick={() => setActiveContent("viewStaff")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "View Staff" : <ImUsers />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <ImUsers className="text-lg" />
+                <span className="ml-2">View Staff</span>
+              </>
+            ) : (
+              <ImUsers className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* Add Subject */}
           <button
             onClick={() => setActiveContent("addSubject")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "Add Subject" : <IoBookSharp />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <IoBookSharp className="text-lg" />
+                <span className="ml-2">Add Subject</span>
+              </>
+            ) : (
+              <IoBookSharp className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* View Subject */}
           <button
             onClick={() => setActiveContent("viewSubject")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "View Subject" : <FcReading />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <FcReading className="text-lg" />
+                <span className="ml-2">View Subject</span>
+              </>
+            ) : (
+              <FcReading className="text-lg mx-auto" />
+            )}
           </button>
         </nav>
       </div>

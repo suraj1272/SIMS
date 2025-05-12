@@ -89,30 +89,74 @@ const StudentHome = () => {
           </button>
         </div>
         <nav className="flex flex-col space-y-2">
+          {/* Dashboard */}
           <button
             onClick={() => setActiveContent("dashboard")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "Dashboard" : <MdDashboard />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <MdDashboard className="text-lg" />
+                <span className="ml-2">Dashboard</span>
+              </>
+            ) : (
+              <MdDashboard className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* View Attendance */}
           <button
             onClick={() => setActiveContent("viewAttendance")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "View Attendance" : <CiViewList />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <CiViewList className="text-lg" />
+                <span className="ml-2">View Attendance</span>
+              </>
+            ) : (
+              <CiViewList className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* View Notice */}
           <button
             onClick={() => setActiveContent("viewNotice")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "View Notice" : <FcReading />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <FcReading className="text-lg" />
+                <span className="ml-2">View Notice</span>
+              </>
+            ) : (
+              <FcReading className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* View Question Paper */}
           <button
             onClick={() => setActiveContent("viewQuestionPaper")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "View Question Paper" : <MdOutlinePreview />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <MdOutlinePreview className="text-lg" />
+                <span className="ml-2">View Question Paper</span>
+              </>
+            ) : (
+              <MdOutlinePreview className="text-lg mx-auto" />
+            )}
           </button>
+
+          {/* View Marks */}
           <button
             onClick={() => setActiveContent("viewMarks")}
-            className="block text-left px-4 py-2 hover:bg-gray-700 rounded">
-            {isSidebarOpen ? "View Marks" : <CiViewList />}
+            className="flex items-center px-4 py-2 hover:bg-gray-700 rounded transition-all duration-200">
+            {isSidebarOpen ? (
+              <>
+                <CiViewList className="text-lg" />
+                <span className="ml-2">View Marks</span>
+              </>
+            ) : (
+              <CiViewList className="text-lg mx-auto" />
+            )}
           </button>
         </nav>
       </div>
