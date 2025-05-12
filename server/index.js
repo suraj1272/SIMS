@@ -23,7 +23,7 @@ mongoose
   .connect("mongodb://localhost:27017/SIMS")
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
-
+//admin login
 App.post("/adminLogin", (req, res) => {
   const { email, password } = req.body;
 
@@ -42,7 +42,7 @@ App.post("/adminLogin", (req, res) => {
     }
   });
 });
-
+// token verification
 const verifyToken = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1]; // Extract token from "Bearer <token>"
 
@@ -66,7 +66,7 @@ App.get("/adminHome", verifyToken, (req, res) => {
 
   res.status(200).json({ message: "Welcome to the admin dashboard" });
 });
-
+//staff login
 App.post("/staffLogin", (req, res) => {
   const { email, password } = req.body;
 
@@ -93,7 +93,7 @@ App.get("/staffHome", verifyToken, (req, res) => {
 
   res.status(200).json({ message: "Welcome to the staff dashboard" });
 });
-
+//student login
 App.post("/studentLogin", (req, res) => {
   const { usn, password } = req.body;
 
@@ -119,26 +119,26 @@ App.get("/studentHome", verifyToken, (req, res) => {
 
   res.status(200).json({ message: "Welcome to the student dashboard" });
 });
-
+//admin adding student details
 App.post("/stdDetails", (req, res) => {
   StdModel.create(req.body)
     .then((StdDetails) => res.json(StdDetails))
     .catch((err) => res.json(err));
 });
-
+//admin adding staff details
 App.post("/staffDetails", (req, res) => {
   StaffModule.create(req.body)
     .then((StaffDetails) => res.json(StaffDetails))
     .catch((err) => err.json(err));
 });
-
+//admin adding sub details
 App.post("/addSub", (req, res) => {
   addSubModule
     .create(req.body)
     .then((addSub) => res.json(addSub))
     .catch((err) => res.json(err));
 });
-
+//staff uploding attendance
 App.post("/uplodAtd", (req, res) => {
   const { sem, div, students, subject } = req.body;
   addAtdModule
@@ -148,14 +148,14 @@ App.post("/uplodAtd", (req, res) => {
       res.status(500).json({ error: "Failed to save attendance", details: err })
     );
 });
-
+//staff uploading notice
 App.post("/upNotice", (req, res) => {
   upNoticeModule
     .create(req.body)
     .then((upNotice) => res.json(upNotice))
     .catch((err) => res.json(err));
 });
-
+//fetching sstudent details for attendance
 App.get("/getStudentsBySemAndDiv", async (req, res) => {
   const { sem, div } = req.query;
   try {
@@ -165,6 +165,7 @@ App.get("/getStudentsBySemAndDiv", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch students", details: err });
   }
 });
+//admin viewing student details
 App.get("/viewStudent", async (req, res) => {
   try {
     const students = await StdModel.find();
@@ -173,7 +174,7 @@ App.get("/viewStudent", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+//admin viewing staff details
 App.get("/viewStaff", async (req, res) => {
   try {
     const staff = await StaffModule.find();
@@ -182,7 +183,7 @@ App.get("/viewStaff", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+// admin viewing subject details
 App.get("/viewSub", async (req, res) => {
   try {
     const subjects = await addSubModule.find();
@@ -191,7 +192,7 @@ App.get("/viewSub", async (req, res) => {
     req.status(500).json({ error: err.message });
   }
 });
-
+//staff uploding question paper
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -226,7 +227,7 @@ App.post("/upQp", upload.single("file"), async (req, res) => {
       .json({ error: "Failed to upload question paper", details: error });
   }
 });
-
+//student viewing attendance by there usn
 App.get("/getAttendanceByUsn", async (req, res) => {
   const { usn } = req.query;
 
@@ -237,7 +238,7 @@ App.get("/getAttendanceByUsn", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch attendance", details: err });
   }
 });
-
+//student viewing notice
 App.get("/viewNotice", async (req, res) => {
   try {
     const notice = await upNoticeModule.find();
@@ -246,6 +247,7 @@ App.get("/viewNotice", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+//student viewing question paper
 App.get("/getAllQp", async (req, res) => {
   try {
     const questionPapers = await QuestionPaper.find();
@@ -256,7 +258,7 @@ App.get("/getAllQp", async (req, res) => {
       .json({ error: "Failed to fetch question papers", details: err });
   }
 });
-
+//staff deleting notice
 App.delete("/deleteNotice/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -266,6 +268,8 @@ App.delete("/deleteNotice/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete notice", details: err });
   }
 });
+
+//staff updating notice
 App.put("/updateNotice/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -280,6 +284,7 @@ App.put("/updateNotice/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update notice", details: err });
   }
 });
+//admin updating student details
 App.put("/updateStudent/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -292,6 +297,8 @@ App.put("/updateStudent/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update student", details: err });
   }
 });
+
+//admin deleting student details
 App.delete("/deleteStudent/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -301,6 +308,7 @@ App.delete("/deleteStudent/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete student", details: err });
   }
 });
+//admin deleting subject details
 App.delete("/deleteSub/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -310,6 +318,7 @@ App.delete("/deleteSub/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete subject", details: err });
   }
 });
+//admin updating subject details
 App.put("/updateSub/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -326,6 +335,7 @@ App.put("/updateSub/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update subject", details: err });
   }
 });
+
 App.delete("/deleteSub/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -335,6 +345,8 @@ App.delete("/deleteSub/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete subject", details: err });
   }
 });
+
+//admin deleting staff details
 App.delete("/deleteStaff/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -344,6 +356,8 @@ App.delete("/deleteStaff/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete staff", details: err });
   }
 });
+
+//admin updating staff details
 App.put("/updateStaff/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -356,7 +370,7 @@ App.put("/updateStaff/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update staff", details: err });
   }
 });
-
+//staff uploading marks
 App.post("/addMarks", async (req, res) => {
   try {
     const { marksData } = req.body; // Array of marks data
@@ -366,6 +380,7 @@ App.post("/addMarks", async (req, res) => {
     res.status(500).json({ error: "Failed to add marks", details: err });
   }
 });
+//student viewing marks
 App.get("/getMarks/:usn", async (req, res) => {
   try {
     const { usn } = req.params;
@@ -389,6 +404,7 @@ App.post("/addMarks", async (req, res) => {
     res.status(500).json({ error: "Failed to add marks", details: err });
   }
 });
+//staff finding students by sem and div in staff portal
 App.get("/getStudentsBySemAndDiv", async (req, res) => {
   const { sem, div } = req.query;
   try {
@@ -398,7 +414,7 @@ App.get("/getStudentsBySemAndDiv", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch students", details: err });
   }
 });
-
+//staff getting subjects to upload marks
 App.get("/getSubjects", async (req, res) => {
   try {
     const subjects = await addSubModule.find();
