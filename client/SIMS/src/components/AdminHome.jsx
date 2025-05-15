@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FcReading } from "react-icons/fc";
 import { ImUsers } from "react-icons/im";
@@ -25,6 +26,26 @@ const AdminHome = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeContent, setActiveContent] = useState("dashboard");
   const [isProfileOpen, setIsProfileOpen] = useState(false); // State to toggle profile container
+  const [studentCount, setStudentCount] = useState(0);
+  const [staffCount, setStaffCount] = useState(0);
+  const [subjectCount, setSubjectCount] = useState(0);
+
+  useEffect(() => {
+    // Fetch student count
+    axios.get("http://localhost:5000/viewStudent").then((response) => {
+      setStudentCount(response.data.length);
+    });
+
+    // Fetch staff count
+    axios.get("http://localhost:5000/viewStaff").then((response) => {
+      setStaffCount(response.data.length);
+    });
+
+    // Fetch subject count
+    axios.get("http://localhost:5000/viewSub").then((response) => {
+      setSubjectCount(response.data.length);
+    });
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -213,7 +234,24 @@ const AdminHome = () => {
             </div>
           )}
         </header>
-        <main className="flex-1 p-6 bg-gray-100 overflow-hidden">
+        <main className="flex-1 p-6 bg-gradient-to-br from-gray-100 to-gray-300 overflow-hidden">
+          <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8"></h2>
+          {activeContent === "dashboard" && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                <h2 className="text-2xl font-bold mb-2">Students</h2>
+                <p className="text-4xl font-extrabold">{studentCount}</p>
+              </div>
+              <div className="bg-gradient-to-r from-green-500 to-green-700 text-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                <h2 className="text-2xl font-bold mb-2">Staff</h2>
+                <p className="text-4xl font-extrabold">{staffCount}</p>
+              </div>
+              <div className="bg-gradient-to-r from-purple-500 to-purple-700 text-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                <h2 className="text-2xl font-bold mb-2">Subjects</h2>
+                <p className="text-4xl font-extrabold">{subjectCount}</p>
+              </div>
+            </div>
+          )}
           {renderContent()}
         </main>
       </div>

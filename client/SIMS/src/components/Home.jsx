@@ -6,7 +6,7 @@ function Home() {
       {/* Navigation Bar */}
       <nav className="bg-white shadow-md py-4 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">College Portal</h1>
+          <h1 className="text-2xl font-bold text-blue-600">SIMS</h1>
           <ul className="flex flex-col md:flex-row justify-center items-center gap-6">
             <li>
               <Link
@@ -37,7 +37,7 @@ function Home() {
       <header className="flex-grow flex items-center justify-center text-center px-6">
         <div className="max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6">
-            Welcome to the College Management System
+            Welcome to the Student Information Management System
           </h2>
           <p className="text-lg text-gray-700 mb-8">
             Manage student, staff, and administrative tasks seamlessly with our
@@ -67,8 +67,7 @@ function Home() {
       <footer className="bg-gray-800 text-white py-6">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-sm">
-            &copy; {new Date().getFullYear()} College Management System. All
-            rights reserved.
+            &copy; {new Date().getFullYear()} SIMS. All rights reserved.
           </p>
         </div>
       </footer>

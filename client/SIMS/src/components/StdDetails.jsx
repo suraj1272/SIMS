@@ -48,14 +48,14 @@ const StdDetails = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 p-6">
-      <div className="w-full max-w-4xl bg-white shadow-2xl rounded-3xl p-8 md:p-10">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 p-0">
+      <div className="w-full max-w-6xl bg-white shadow-2xl rounded-3xl p-8 md:p-10">
         <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-6">
           Register Student
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* First Name */}
           <div>
             <label
@@ -240,7 +240,7 @@ const StdDetails = () => {
           </div>
 
           {/* Submit and Register Staff Buttons */}
-          <div className="col-span-1 md:col-span-2 flex flex-col md:flex-row gap-4">
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 flex flex-col md:flex-row gap-4">
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-lg transition duration-300">

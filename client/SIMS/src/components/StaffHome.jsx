@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { FaFileUpload, FaRegUserCircle } from "react-icons/fa";
 import { MdDashboard, MdDriveFolderUpload, MdFileUpload } from "react-icons/md";
 import {
@@ -36,6 +37,27 @@ export const StaffHome = () => {
   const toggleProfile = () => {
     setIsProfileOpen(!isProfileOpen);
   };
+
+  const [studentCount, setStudentCount] = useState(0);
+  const [noticeCount, setNoticeCount] = useState(0);
+  const [questionPaperCount, setQuestionPaperCount] = useState(0);
+
+  useEffect(() => {
+    // Fetch student count
+    axios.get("http://localhost:5000/viewStudent").then((response) => {
+      setStudentCount(response.data.length);
+    });
+
+    // Fetch notice count
+    axios.get("http://localhost:5000/viewNotice").then((response) => {
+      setNoticeCount(response.data.length);
+    });
+
+    // Fetch question paper count
+    axios.get("http://localhost:5000/getAllQp").then((response) => {
+      setQuestionPaperCount(response.data.length);
+    });
+  }, []);
 
   const renderContent = () => {
     switch (activeContent) {
@@ -173,7 +195,28 @@ export const StaffHome = () => {
             </div>
           )}
         </header>
-        <main className="flex-1 p-6 bg-gray-100 overflow-hidden">
+        <main className="flex-1 p-6 bg-gradient-to-br from-gray-100 to-gray-300 overflow-hidden">
+          <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">
+            Welcome to the Staff Dashboard
+          </h2>
+          {activeContent === "dashboard" && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                <h2 className="text-2xl font-bold mb-2">Students</h2>
+                <p className="text-4xl font-extrabold">{studentCount}</p>
+              </div>
+              <div className="bg-gradient-to-r from-green-500 to-green-700 text-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                <h2 className="text-2xl font-bold mb-2">Uploaded Notices</h2>
+                <p className="text-4xl font-extrabold">{noticeCount}</p>
+              </div>
+              <div className="bg-gradient-to-r from-purple-500 to-purple-700 text-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                <h2 className="text-2xl font-bold mb-2">
+                  Uploaded Question Papers
+                </h2>
+                <p className="text-4xl font-extrabold">{questionPaperCount}</p>
+              </div>
+            </div>
+          )}
           {renderContent()}
         </main>
       </div>

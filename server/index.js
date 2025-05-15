@@ -141,6 +141,7 @@ App.post("/addSub", (req, res) => {
 //staff uploding attendance
 App.post("/uplodAtd", (req, res) => {
   const { sem, div, students, subject } = req.body;
+
   addAtdModule
     .create({ sem, div, students, subject })
     .then((addAtd) => res.status(201).json(addAtd))
